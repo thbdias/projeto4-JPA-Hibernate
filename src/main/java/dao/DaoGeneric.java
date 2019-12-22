@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.List;
+
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -46,6 +49,17 @@ public class DaoGeneric<E> {
 										+ entidade.getClass().getSimpleName().toLowerCase() 
 										+ " where id = " + id).executeUpdate();
 		transaction.commit();
+	}
+	
+	public List<E> listar(Class<E> entidade){
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		
+		List<E> lista = entityManager.createQuery("from " + entidade.getName()).getResultList();
+		
+		transaction.commit();
+		
+		return lista;
 	}
 	
 
