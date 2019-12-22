@@ -16,7 +16,7 @@ public class TesteHibernate {
 		UsuarioPessoa pessoa = new UsuarioPessoa();
 		pessoa.setIdade(45);
 		pessoa.setLogin("teste");
-		pessoa.setNome("maria 3");
+		pessoa.setNome("maria 5");
 		pessoa.setSenha("123");
 		pessoa.setSobrenome("rosario");
 		pessoa.setEmail("teste@teste.com");
@@ -87,4 +87,22 @@ public class TesteHibernate {
 			System.out.println(pessoa);			
 		}
 	}	
+	
+	@Test
+	public void testeQueryListMaxResult(){
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		List<UsuarioPessoa> list = daoGeneric.getEntityManager().createQuery("from UsuarioPessoa order by nome").setMaxResults(3).getResultList();
+		
+		for (UsuarioPessoa pessoa : list) {			
+			System.out.println(pessoa);			
+		}
+	}	
+	
+	
 }
+
+
+
+
+
+
