@@ -113,6 +113,15 @@ public class TesteHibernate {
 	}
 	
 	
+	@Test
+	public void testQuerySomaIdade() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();
+		
+		Long somaIdade = (Long) daoGeneric.getEntityManager().createQuery("select sum(u.idade) from UsuarioPessoa u").getSingleResult();
+		
+		System.out.println("Soma de todas as idade é ---> " + somaIdade);
+	}
+	
 }
 
 
