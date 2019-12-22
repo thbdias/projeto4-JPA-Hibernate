@@ -55,4 +55,13 @@ public class TesteHibernate {
 		System.out.println("===>>> " + pessoa);
 	}
 	
+	
+	@Test
+	public void testeDelete() {
+		DaoGeneric<UsuarioPessoa> daoGeneric = new DaoGeneric<UsuarioPessoa>();		
+		UsuarioPessoa pessoa = daoGeneric.pesquisar(2L, UsuarioPessoa.class);
+		
+		daoGeneric.deletarPorId(pessoa);				
+	}
+	
 }
