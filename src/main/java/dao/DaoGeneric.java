@@ -27,5 +27,15 @@ public class DaoGeneric<E> {
 		return (E) entityManager.find(entidade, id);		
 	}
 	
+	//salva ou atualiza
+	public E updateMerge(E entidade) {
+		EntityTransaction transaction = entityManager.getTransaction();
+		transaction.begin();
+		E e = entityManager.merge(entidade);
+		transaction.commit();
+		
+		return e;
+	}
+	
 
 }
