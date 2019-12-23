@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import dao.DaoGeneric;
+import model.TelefoneUser;
 import model.UsuarioPessoa;
 
 public class TesteHibernate {
@@ -139,6 +140,36 @@ public class TesteHibernate {
 		for (UsuarioPessoa pessoa : list) {			
 			System.out.println(pessoa);			
 		}
+	}
+	
+	@Test
+	public void testeGravaTelefone() {
+		DaoGeneric daoGeneric = new DaoGeneric();
+		
+		UsuarioPessoa pessoa = (UsuarioPessoa) daoGeneric.pesquisar(1L, UsuarioPessoa.class);
+		
+		TelefoneUser telefoneUser = new TelefoneUser();
+		telefoneUser.setTipo("casa");
+		telefoneUser.setNumero("555555");
+		telefoneUser.setPessoa(pessoa);
+		
+		daoGeneric.salvar(telefoneUser);
+	}
+	
+	@Test
+	public void testeConsultaTelefones() {
+		DaoGeneric daoGeneric = new DaoGeneric();
+		
+		UsuarioPessoa pessoa = (UsuarioPessoa) daoGeneric.pesquisar(1L, UsuarioPessoa.class);
+		
+		for (TelefoneUser telefoneUser : pessoa.getTelefoneUsers()) {
+			System.out.println(telefoneUser.getNumero());
+			System.out.println(telefoneUser.getTipo());
+			System.out.println(telefoneUser.getPessoa().getNome());
+			System.out.println("---------------------------------");
+		}
+		
+		
 	}
 	
 }
